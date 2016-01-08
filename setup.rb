@@ -2,6 +2,7 @@ require 'gmail'
 require 'rubygems'
 require 'twilio-ruby'
 require 'newrelic_rpm'
+require 'active_support/time'
 class GmailClient
 	# Get client instance var setup
 	def initialize

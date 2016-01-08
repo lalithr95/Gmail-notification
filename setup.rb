@@ -34,12 +34,12 @@ class GmailClient
 		  url: 'https://demo.twilio.com/welcome/voice/'
 		)
 		puts "Called the number, Have a look!"
-		@twilio.messages.create(
-		  from: '+14014000674',
-		  to: '+918008840099',
-		  body: "Hey, You have a new mail from #{@email}"
-		)
-		puts "Message sent to user, Have a look!"
+		# @twilio.messages.create(
+		#   from: '+14014000674',
+		#   to: '+918008840099',
+		#   body: "Hey, You have a new mail from #{@email}"
+		# )
+		# puts "Message sent to user, Have a look!"
 	end
 end
 

@@ -2,15 +2,16 @@ require 'gmail'
 require 'rubygems'
 require 'twilio-ruby'
 require 'newrelic_rpm'
+require 'active_support/time'
 class GmailClient
 	# Get client instance var setup
 	def initialize
-		@client = Gmail.new "lalithr1995@gmail.com", "adminr95"
+		@client = Gmail.new "lalithr1995@gmail.com", "adminr951"
 		account_sid = 'AC4fd5e16d1ac2a6a03ebe0ee1011e60fd'
 		auth_token = '183beed6fb87b7d75062e4cb01ee4fa1'
 		@twilio = Twilio::REST::Client.new account_sid, auth_token
 		@previous = 0
-		@email = 'lalithr95@gmail.com'
+		@email = 'support@synack.com'
 		puts "Client setup complete"
 	end
 
@@ -46,6 +47,6 @@ gObj = GmailClient.new
 NewRelic::Agent.manual_start
 while 1
 	gObj.schedule
-	sleep 30
+	sleep 5.minutes
 	puts "Retrying"
 end

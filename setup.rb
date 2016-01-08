@@ -9,18 +9,18 @@ class GmailClient
 		account_sid = 'AC4fd5e16d1ac2a6a03ebe0ee1011e60fd'
 		auth_token = '183beed6fb87b7d75062e4cb01ee4fa1'
 		@twilio = Twilio::REST::Client.new account_sid, auth_token
-		@unread = 0
+		@previous = 0
 		puts "Client setup complete"
 	end
 
 	def ping email="lalithr95@gmail.com", after="2016-01-07"
-		@unread += @client.inbox.count(:unread, :from => email, :after => Date.parse(after))
+		@unread = @client.inbox.count(:unread, :from => email, :after => Date.parse(after))
 	end
 
 	def schedule
-		if ping > 0
-			puts "You have unread mails"
-			@unread -= 1
+		if ping > 0 and @unread > @previous
+			puts "You have #{@unread} unread mails"
+			@previous = @unread
 			makecall
 		end
 	end
@@ -38,6 +38,6 @@ end
 gObj = GmailClient.new
 while 1
 	gObj.schedule
-	sleep 15000
+	sleep 30
 	puts "Retrying"
 end

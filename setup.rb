@@ -1,7 +1,7 @@
 require 'gmail'
 require 'rubygems'
 require 'twilio-ruby'
-
+require 'newrelic_rpm'
 class GmailClient
 	# Get client instance var setup
 	def initialize
@@ -10,11 +10,12 @@ class GmailClient
 		auth_token = '183beed6fb87b7d75062e4cb01ee4fa1'
 		@twilio = Twilio::REST::Client.new account_sid, auth_token
 		@previous = 0
+		@email = 'lalithr95@gmail.com'
 		puts "Client setup complete"
 	end
 
-	def ping email="lalithr95@gmail.com", after="2016-01-07"
-		@unread = @client.inbox.count(:unread, :from => email, :after => Date.parse(after))
+	def ping after="2016-01-07"
+		@unread = @client.inbox.count(:unread, :from => @email, :after => Date.parse(after))
 	end
 
 	def schedule
@@ -32,10 +33,17 @@ class GmailClient
 		  url: 'https://demo.twilio.com/welcome/voice/'
 		)
 		puts "Called the number, Have a look!"
+		@twilio.messages.create(
+		  from: '+14014000674',
+		  to: '+918008840099',
+		  body: "Hey, You have a new mail from #{@email}"
+		)
+		puts "Message sent to user, Have a look!"
 	end
 end
 
 gObj = GmailClient.new
+NewRelic::Agent.manual_start
 while 1
 	gObj.schedule
 	sleep 30

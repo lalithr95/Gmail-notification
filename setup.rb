@@ -11,7 +11,7 @@ class GmailClient
 		auth_token = '183beed6fb87b7d75062e4cb01ee4fa1'
 		@twilio = Twilio::REST::Client.new account_sid, auth_token
 		@previous = 0
-		@email = 'lalithr95@gmail.com'
+		@email = 'support@synack.com'
 		puts "Client setup complete"
 	end
 

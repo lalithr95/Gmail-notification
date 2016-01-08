@@ -29,6 +29,3 @@ DEPENDENCIES
   newrelic_rpm
   rollbar (~> 2.7.1)
   twilio-ruby (~> 4.2.1)
-
-BUNDLED WITH
-   1.11.2

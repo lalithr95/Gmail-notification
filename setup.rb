@@ -46,6 +46,6 @@ gObj = GmailClient.new
 NewRelic::Agent.manual_start
 while 1
 	gObj.schedule
-	sleep 30
+	sleep 5.minutes
 	puts "Retrying"
 end

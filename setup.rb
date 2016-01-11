@@ -6,7 +6,7 @@ require 'active_support/time'
 class GmailClient
 	# Get client instance var setup
 	def initialize
-		@client = Gmail.new "lalithr1995@gmail.com", "adminr951"
+		@client = Gmail.new ENV['email'], ENV['password']
 		account_sid = 'AC4fd5e16d1ac2a6a03ebe0ee1011e60fd'
 		auth_token = '183beed6fb87b7d75062e4cb01ee4fa1'
 		@twilio = Twilio::REST::Client.new account_sid, auth_token

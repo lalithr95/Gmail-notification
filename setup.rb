@@ -16,7 +16,15 @@ class GmailClient
 	end
 
 	def ping after="2016-01-07"
-		@unread = @client.inbox.count(:unread, :from => @email, :after => Date.parse(after))
+		begin
+			@unread = @client.inbox.count(:unread, :from => @email, :after => Date.parse(after))
+		rescue Exception => e
+			@twilio.messages.create(
+					from: '+14014000674',
+					to: '+918008840099',
+					body: "Hey, An error Occured in server"
+				)
+		end
 	end
 
 	def schedule
